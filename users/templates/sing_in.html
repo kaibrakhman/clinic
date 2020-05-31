@@ -1,0 +1,23 @@
+{% extends 'main.html' %}
+{% block title %}Sign in{% endblock title %}
+
+{% block content %}
+    <div class = "container">
+        <br>
+        <form method="post">
+            {% csrf_token %}
+
+            <h4>Псевдоним: </h4>{{ form.username }}
+            <br>
+            <br>
+            <h4>Пароль: </h4>
+            {{ form.password }}
+            <br>
+            <br>
+            <button type="submit" class="btn btn-primary">Вход</button>
+        </form>
+    <br>
+    <h1>Нету аккаунта?</h1>
+    <a href="{% url 'sig_up' %}"><button class="btn btn-primary">Регистрация</button></a>
+    </div>
+{% endblock content %}

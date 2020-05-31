@@ -1,0 +1,21 @@
+{% extends 'main.html' %}
+{% block title %}Цены{% endblock title %}
+
+{% block content %}
+    <div class="container">
+        <ul class="list-group">
+            {% for doctor in all_doctors %}
+                <li class="list-group-item">
+                    <div>
+                        <a style="font-size: 20px" href="{{ doctor.get_absolute_url }}">
+                            <img src="{{ doctor.image.url }}">
+                            <br>
+                            {{ doctor.full_name }}
+                        </a>
+                        <p>{{ doctor.rank }}</p>
+                        <p>Приём: <b>{{ doctor.price }} тг.</b></p>
+                    </div></li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock content %}

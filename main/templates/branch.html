@@ -1,0 +1,25 @@
+{% extends 'main.html' %}
+{% block title %}{{ branch.name }}{% endblock title %}
+
+{% block content %}
+    <div class="container">
+        <h1 style="margin: 0 42%">{{ branch.name }}</h1>
+        <br>
+        <h5>{{ branch.description }}</h5>
+        <br>
+        <h2>Врачи этого отделения</h2>
+        <ul class="list-group list-group-horizontal">
+            {% for doctor in doctors %}
+                <li class="list-group-item">
+                    <div>
+                        <a style="font-size: 20px" href="{{ doctor.get_absolute_url }}">
+                            <img src="{{ doctor.image.url }}">
+                            <br>
+                            {{ doctor.full_name }}
+                        </a>
+                        <p>{{ doctor.rank }}</p>
+                    </div></li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock content %}

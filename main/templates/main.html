@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Главная{% endblock title %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="padding: 0.5% 28%; width: 100%">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" style="margin: 0 20px">
+        <a class="nav-link" href="{% url 'main_view' %}">Главная<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item dropdown" style="margin: 0 20px">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Отделения
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            {% for branch in all_branches %}
+                <a class="dropdown-item" href="{{ branch.get_absolute_url }}">{{ branch.name }}</a>
+            {% endfor %}
+        </div>
+      </li>
+      <li class="nav-item dropdown" style="margin: 0 20px">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Врачи
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            {% for doctor in all_doctors %}
+                <a class="dropdown-item" href="{{ doctor.get_absolute_url }}">{{ doctor.full_name }}</a>
+            {% endfor %}
+        </div>
+      </li>
+      <li class="nav-item" style="margin: 0 20px">
+        <a class="nav-link" href="{% url 'prices_view' %}">Цены<span class="sr-only">(current)</span></a>
+      </li>
+      {% if user.is_authenticated %}
+          <li class="nav-item" style="margin: 0 20px">
+            <a class="nav-link" href="{% url 'sign_out' %}">Выйти<span class="sr-only">(current)</span></a>
+          </li>
+      {% else %}
+          <li class="nav-item" style="margin: 0 20px">
+            <a class="nav-link" href="{% url 'sign_in' %}">Войти<span class="sr-only">(current)</span></a>
+          </li>
+      {% endif %}
+
+    </ul>
+  </div>
+</nav>
+<br>
+{% block content %}
+    <div class="container">
+        <h2>Международный медицинский центр Alpha Clinic в Алматы</h2>
+        <p>
+            Альфа Клиник Алматы был открыт в 2002 году и является первым филиалом крупнейшей международной корпорации на территории Казахстана.
+            За годы успешного развития на рынке частных медицинских услуг наши специалисты обрели бесценный практический опыт в области диагностики и используют лучшие методики лечения расстройств у мужчин, проктологических и гинекологических заболеваний.
+        </p>
+        <br>
+        <h2>Отделения клиники</h2>
+        <div class="list-group">
+            {% for branch in all_branches %}
+                <a href="{{ branch.get_absolute_url }}" class="list-group-item list-group-item-action">{{ branch.name }}</a>
+            {% endfor %}
+        </div>
+        <br>
+        <h2>Наши врачи</h2>
+        <ul class="list-group">
+            {% for doctor in all_doctors %}
+                <li class="list-group-item">
+                    <div>
+                        <a style="font-size: 20px" href="{{ doctor.get_absolute_url }}">
+                            <img src="{{ doctor.image.url }}">
+                            <br>
+                            {{ doctor.full_name }}
+                        </a>
+                        <p>{{ doctor.rank }}</p>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock content %}
+<br>
+</body>
+<footer>
+    <div class="card text-center">
+          <div class="card-header">
+            Контактные данные
+          </div>
+          <div class="card-body">
+              <div style="display: inline-block; width: 50%">
+                <h4 class="card-title">Телефоны</h4>
+                <h5>8-777-777-77-77</h5>
+                <h5>8-777-777-77-77</h5>
+              </div>
+              <hr>
+              <div style="display: inline-block; width: 50%">
+                <h4 class="card-title">Мы в социальных сетях</h4>
+                <h5>Instagram: @alphaclinic</h5>
+                <h5>email: aplha_clinic@mail.ru</h5>
+              </div>
+            <hr>
+            <p>Мы находимся по адресу Манаса, 34</p>
+          </div>
+        </div>
+</footer>
+</html>

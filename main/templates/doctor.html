@@ -1,0 +1,20 @@
+{% extends 'main.html' %}
+{% block title %}{{ doctor.full_name }}{% endblock title %}
+
+{% block content %}
+    <div style="margin-left: 155px">
+        <div style="float: left;">
+            <img src="{{ doctor.image.url }}" style="width: 330px; height: 300px">
+        </div>
+        <div>
+            <h2>{{ doctor.full_name }}</h2>
+            <p>{{ doctor.rank }}</p>
+            {% for time in times %}
+                <b>{{ time.day }}: </b>{{ time.start_t }} - {{ time.finish_t }}
+                <br>
+            {% endfor %}
+        <br>
+            <a href="{% url 'statement_view' doctor.full_name %}"><button class="btn btn-primary">Записаться к врачу</button></a>
+        </div>
+    </div>
+{% endblock content %}

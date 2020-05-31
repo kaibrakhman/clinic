@@ -1,0 +1,31 @@
+{% extends 'main.html' %}
+{% block title %}Запись{% endblock title %}
+
+{% block content %}
+    <script>
+        function myFunction() {
+              alert("Ваша заявка принята, и находится в обработке!");
+        }
+    </script>
+        <div class="container">
+            <div style="margin: 10%; padding: 2%; background-color: lavender">
+                <h1 style="margin: 0 32%">Запись к врачу</h1>
+                <form>
+                  <div class="form-group" style="margin: 3%">
+                    <input class="form-control" id="exampleFormControlInput1" name="patient_name" placeholder="Полное имя пациента* ">
+                  </div>
+                  <div class="form-group" style="margin: 3%">
+                    <input class="form-control" id="exampleFormControlInput1" name="phone_number" placeholder="Номер телефоне* ">
+                  </div>
+                  <h5 style="margin-left: 30%">Врач: {{ doctor.full_name }}</h5>
+                  <div class="form-group" style="margin: 3%">
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                              placeholder="Комментарии к заявке" name="comment"></textarea>
+                  </div>
+                  <button class="btn btn-primary" onclick="myFunction()" style="margin-left: 3%">Подтвердить</button>
+                </form>
+                <br>
+                <a href="{% url 'main_view' %}" style="margin-left: 88%"><button class="btn btn-warning">Назад</button></a>
+            </div>
+        </div>
+{% endblock content %}
